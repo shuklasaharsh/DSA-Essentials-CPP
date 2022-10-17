@@ -60,14 +60,22 @@ int linear_search_index(const int *arr, int size, int key) {
  */
 int binary_search(const int *arr, int start, int end, int key) {
     int middle_index = (start + end)/2;
-
+    // If not found
+    if (start == end) {
+        return -1;
+    }
+    // If found
     if (arr[middle_index] == key) {
         return middle_index;
+        // If the number is greater than key
     } else if (arr[middle_index] > key) {
         return binary_search(arr, start, middle_index - 1, key);
-    } else {
+        // If the number is less than key
+    } else if (arr[middle_index] < key) {
         return binary_search(arr, middle_index + 1, end, key);
     }
+    // Default case
+    return -1;
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
