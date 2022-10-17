@@ -120,7 +120,7 @@ void print_pairs(const int *arr, int size) {
 }
 
 /*
- * print_sub_arrays prints all the sub arrays of a given array
+ * print_sub_arrays_bulk_force prints all the sub arrays of a given array
  *
  * Example: 1, 2, 3, 4 will have
  * 1, 2, 3, 4
@@ -132,7 +132,7 @@ void print_pairs(const int *arr, int size) {
  *
  * Time Space: O(n^2)
  */
-void print_sub_arrays(const int *arr, int size) {
+void print_sub_arrays_bulk_force(const int *arr, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = i; j < size; j++) {
             cout << arr[j] << " ";
