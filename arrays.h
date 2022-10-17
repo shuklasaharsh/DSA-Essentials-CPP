@@ -5,6 +5,11 @@
 #ifndef DSA_ESSENTIALS_ARRAYS_H
 #define DSA_ESSENTIALS_ARRAYS_H
 
+#include <iostream>
+#include <utility>
+
+using namespace std;
+
 /*
  * linear_search searches in an array linearly
  *
@@ -59,7 +64,7 @@ int linear_search_index(const int *arr, int size, int key) {
 
  */
 int binary_search(const int *arr, int start, int end, int key) {
-    int middle_index = (start + end)/2;
+    int middle_index = (start + end) / 2;
     // If not found
     if (start == end) {
         return -1;
@@ -76,6 +81,29 @@ int binary_search(const int *arr, int start, int end, int key) {
     }
     // Default case
     return -1;
+}
+
+/*
+ * reverse_array goes from start and the end and swaps the elements until it reaches the middle
+ */
+void reverse_array(int arr[], int size) {
+    int start = 0;
+    int end = size - 1;
+    while (start < end) {
+        swap(arr[start], arr[end]);
+        start++;
+        end--;
+    }
+}
+
+/*
+ * print_array linearly goes over each and every element of the array and prints it
+ */
+void print_array(int arr[], int size) {
+    for (int i = 0; i < size; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
