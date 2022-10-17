@@ -99,11 +99,24 @@ void reverse_array(int arr[], int size) {
 /*
  * print_array linearly goes over each and every element of the array and prints it
  */
-void print_array(int arr[], int size) {
+void print_array(const int *arr, int size) {
     for (int i = 0; i < size; i++) {
         cout << arr[i] << " ";
     }
     cout << endl;
+}
+
+/*
+ * print_pairs goes over each individual element and all the others with it to print out pairs
+ *
+ * Time Space: n!
+ */
+void print_pairs(const int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            cout << arr[i] << " " << arr[j] << endl;
+        }
+    }
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
