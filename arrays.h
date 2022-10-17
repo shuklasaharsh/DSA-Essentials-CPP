@@ -119,4 +119,26 @@ void print_pairs(const int *arr, int size) {
     }
 }
 
+/*
+ * print_sub_arrays prints all the sub arrays of a given array
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4
+ * 1, 2, 3
+ * 3, 4
+ * 4
+ *
+ * as its four sub arrays
+ *
+ * Time Space: O(n^2)
+ */
+void print_sub_arrays(const int *arr, int size) {
+    for (int i = 0; i < size; i++) {
+        for (int j = i; j < size; j++) {
+            cout << arr[j] << " ";
+        }
+        cout << endl;
+    }
+}
+
 #endif //DSA_ESSENTIALS_ARRAYS_H
