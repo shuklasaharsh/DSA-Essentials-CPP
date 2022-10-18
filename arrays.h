@@ -8,6 +8,7 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -126,8 +127,8 @@ void print_pairs(const int *arr, int size) {
  * Example: 1, 2, 3, 4 will have
  * 1, 2, 3, 4
  * 1, 2, 3
- * 3, 4
- * 4
+ * 1, 2
+ * 1
  *
  * 2, 3, 4
  * 3, 4
@@ -136,7 +137,7 @@ void print_pairs(const int *arr, int size) {
  * 3, 4
  * 4
  *
- * as its four sub arrays
+ * as its NC2 sub arrays
  *
  * Time Space: O(n^3)
  */
@@ -152,6 +153,27 @@ void print_sub_arrays_brute_force(const t *arr, int size) {
     }
 }
 
+/*
+ * largest_sum_in_sub_arrays sums all the sub arrays of a given array
+ * [BRUTE FORCE]
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * as its sub array sums
+ *
+ * Time Space: O(n^3)
+ */
 template<typename t>
 int largest_sum_in_sub_arrays(const t *arr, int size) {
     int largest_sum = 0;
@@ -176,6 +198,31 @@ int largest_sum_in_sub_arrays(const t *arr, int size) {
     return largest_sum;
 }
 
+
+/*
+ * largest_sum_sub_arrays_opt sums all the sub arrays of a given array
+ * using a prefix sum array
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * We use a prefix sum approach which computes a prefix array
+ * The sum for a subarray becomes = prefix[i] = prefix[i-1] + arr[i]
+ *
+ * as its sub array sums
+ *
+ * Time Space: O(n^2)
+ */
 template<typename t>
 int largest_sum_sub_arrays_opt(const t *arr, int size) {
     int *pfx_arr = new int(size);
@@ -198,6 +245,43 @@ int largest_sum_sub_arrays_opt(const t *arr, int size) {
         }
     }
     return largest_sum;
+}
+
+/*
+ * largest_sum_sub_array_running_sum sums all the sub arrays of a given array
+ * using a running sum [Kadane's Algorithm]
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ *
+ * as its sub array sums
+ *
+ * To do this we maintain a current sum variable where if we have a sum less than 0, we discard it and start again
+ * Time Space: O(n)
+ */
+template<typename t>
+int largest_sum_sub_array_running_sum(const t *arr, int size) {
+    int max_sum = 0;
+    int current_sum = 0;
+    for (int i = 0; i < size; i++) {
+        current_sum += arr[i];
+        if (current_sum < 0) {
+            current_sum = 0;
+        }
+        max_sum = max(current_sum, max_sum);
+    }
+    return current_sum;
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
