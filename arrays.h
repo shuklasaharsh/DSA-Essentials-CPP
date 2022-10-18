@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <utility>
+#include <vector>
 
 using namespace std;
 
@@ -172,6 +173,30 @@ int largest_sum_in_sub_arrays(const t *arr, int size) {
         cout << arr[i] << " ";
     }
     cout << endl;
+    return largest_sum;
+}
+
+template <typename t>
+int largest_sum_sub_arrays_opt(const t *arr, int size) {
+    vector<int> pfx_arr;
+    pfx_arr.push_back(arr[0]);
+    // Build prefix sum array
+    for (int i = 1; i < size; i++) {
+        pfx_arr.push_back(arr[i] + pfx_arr[i - 1]);
+    }
+    // Get all sums
+    int largest_sum = 0;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            int current_sum = 0;
+            if (i == 0) {
+                current_sum = pfx_arr[j];
+            } else {
+                current_sum = pfx_arr[j] - pfx_arr[i - 1];
+            }
+            largest_sum = max(largest_sum, current_sum);
+        }
+    }
     return largest_sum;
 }
 
