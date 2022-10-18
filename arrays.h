@@ -132,12 +132,15 @@ void print_pairs(const int *arr, int size) {
  *
  * Time Space: O(n^2)
  */
-void print_sub_arrays_bulk_force(const int *arr, int size) {
+template <typename t>
+void print_sub_arrays_bulk_force(const t *arr, int size) {
     for (int i = 0; i < size; i++) {
-        for (int j = i; j < size; j++) {
-            cout << arr[j] << " ";
+        for (int j = 0; j < size; j++) {
+            for (int k = i; k <= j; k++) {
+                cout << arr[k] << " ";
+            }
+            cout << endl;
         }
-        cout << endl;
     }
 }
 
