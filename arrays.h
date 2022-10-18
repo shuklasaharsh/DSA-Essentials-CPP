@@ -120,7 +120,7 @@ void print_pairs(const int *arr, int size) {
 }
 
 /*
- * print_sub_arrays_bulk_force prints all the sub arrays of a given array
+ * print_sub_arrays_brute_force prints all the sub arrays of a given array
  *
  * Example: 1, 2, 3, 4 will have
  * 1, 2, 3, 4
@@ -140,7 +140,7 @@ void print_pairs(const int *arr, int size) {
  * Time Space: O(n^3)
  */
 template <typename t>
-void print_sub_arrays_bulk_force(const t *arr, int size) {
+void print_sub_arrays_brute_force(const t *arr, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             for (int k = i; k <= j; k++) {
@@ -149,6 +149,30 @@ void print_sub_arrays_bulk_force(const t *arr, int size) {
             cout << endl;
         }
     }
+}
+
+template <typename t>
+int largest_sum_in_sub_arrays(const t *arr, int size) {
+    int largest_sum = 0;
+    pair<int, int> indices = {0, 0};
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            int sum = 0;
+            for (int k = i; k <= j; k++) {
+                sum += arr[k];
+            }
+            if (sum > largest_sum) {
+                largest_sum = sum;
+                indices.first = i;
+                indices.second = j;
+            }
+        }
+    }
+    for (int i = indices.first; i <= indices.second; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+    return largest_sum;
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
