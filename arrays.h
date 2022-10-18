@@ -126,8 +126,8 @@ void print_pairs(const int *arr, int size) {
  * Example: 1, 2, 3, 4 will have
  * 1, 2, 3, 4
  * 1, 2, 3
- * 3, 4
- * 4
+ * 1, 2
+ * 1
  *
  * 2, 3, 4
  * 3, 4
@@ -136,7 +136,7 @@ void print_pairs(const int *arr, int size) {
  * 3, 4
  * 4
  *
- * as its four sub arrays
+ * as its NC2 sub arrays
  *
  * Time Space: O(n^3)
  */
@@ -152,6 +152,27 @@ void print_sub_arrays_brute_force(const t *arr, int size) {
     }
 }
 
+/*
+ * largest_sum_in_sub_arrays sums all the sub arrays of a given array
+ * [BRUTE FORCE]
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * as its sub array sums
+ *
+ * Time Space: O(n^3)
+ */
 template<typename t>
 int largest_sum_in_sub_arrays(const t *arr, int size) {
     int largest_sum = 0;
@@ -176,6 +197,31 @@ int largest_sum_in_sub_arrays(const t *arr, int size) {
     return largest_sum;
 }
 
+
+/*
+ * largest_sum_sub_arrays_opt sums all the sub arrays of a given array
+ * using a prefix sum array
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * We use a prefix sum approach which computes a prefix array
+ * The sum for a subarray becomes = prefix[i] = prefix[i-1] + arr[i]
+ *
+ * as its sub array sums
+ *
+ * Time Space: O(n^2)
+ */
 template<typename t>
 int largest_sum_sub_arrays_opt(const t *arr, int size) {
     int *pfx_arr = new int(size);
