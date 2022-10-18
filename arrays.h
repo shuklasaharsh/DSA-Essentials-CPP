@@ -270,7 +270,7 @@ int largest_sum_sub_arrays_opt(const t *arr, int size) {
  * To do this we maintain a current sum variable where if we have a sum less than 0, we discard it and start again
  * Time Space: O(n)
  */
-template <typename t>
+template<typename t>
 int largest_sum_sub_array_running_sum(const t *arr, int size) {
     int max_sum = 0;
     int current_sum = 0;
