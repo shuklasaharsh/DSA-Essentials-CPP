@@ -8,6 +8,7 @@
 #include <iostream>
 #include <utility>
 #include <vector>
+#include <limits>
 
 using namespace std;
 
@@ -244,6 +245,43 @@ int largest_sum_sub_arrays_opt(const t *arr, int size) {
         }
     }
     return largest_sum;
+}
+
+/*
+ * largest_sum_sub_array_running_sum sums all the sub arrays of a given array
+ * using a running sum [Kadane's Algorithm]
+ *
+ * Example: 1, 2, 3, 4 will have
+ * 1, 2, 3, 4 = 10
+ * 1, 2, 3 = 6
+ * 1, 2 = 3
+ * 1 = 1
+ *
+ * 2, 3, 4 = 9
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ * 3, 4 = 7
+ * 4 = 4
+ *
+ *
+ * as its sub array sums
+ *
+ * To do this we maintain a current sum variable where if we have a sum less than 0, we discard it and start again
+ * Time Space: O(n)
+ */
+template <typename t>
+int largest_sum_sub_array_running_sum(const t *arr, int size) {
+    int max_sum = 0;
+    int current_sum = 0;
+    for (int i = 0; i < size; i++) {
+        current_sum += arr[i];
+        if (current_sum < 0) {
+            current_sum = 0;
+        }
+        max_sum = max(current_sum, max_sum);
+    }
+    return current_sum;
 }
 
 #endif //DSA_ESSENTIALS_ARRAYS_H
