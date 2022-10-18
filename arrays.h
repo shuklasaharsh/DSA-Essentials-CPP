@@ -128,9 +128,16 @@ void print_pairs(const int *arr, int size) {
  * 3, 4
  * 4
  *
+ * 2, 3, 4
+ * 3, 4
+ * 4
+ *
+ * 3, 4
+ * 4
+ *
  * as its four sub arrays
  *
- * Time Space: O(n^2)
+ * Time Space: O(n^3)
  */
 template <typename t>
 void print_sub_arrays_bulk_force(const t *arr, int size) {
