@@ -182,7 +182,7 @@ int largest_sum_sub_arrays_opt(const t *arr, int size) {
     pfx_arr[0] = arr[0];
     // Build prefix sum array
     for (int i = 1; i < size; i++) {
-        pfx_arr.push_back(arr[i] + pfx_arr[i - 1]);
+        pfx_arr[i] = (arr[i] + pfx_arr[i - 1]);
     }
     // Get all sums
     int largest_sum = 0;
