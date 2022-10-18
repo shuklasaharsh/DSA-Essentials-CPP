@@ -140,7 +140,7 @@ void print_pairs(const int *arr, int size) {
  *
  * Time Space: O(n^3)
  */
-template <typename t>
+template<typename t>
 void print_sub_arrays_brute_force(const t *arr, int size) {
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -152,7 +152,7 @@ void print_sub_arrays_brute_force(const t *arr, int size) {
     }
 }
 
-template <typename t>
+template<typename t>
 int largest_sum_in_sub_arrays(const t *arr, int size) {
     int largest_sum = 0;
     pair<int, int> indices = {0, 0};
@@ -176,10 +176,10 @@ int largest_sum_in_sub_arrays(const t *arr, int size) {
     return largest_sum;
 }
 
-template <typename t>
+template<typename t>
 int largest_sum_sub_arrays_opt(const t *arr, int size) {
-    vector<int> pfx_arr;
-    pfx_arr.push_back(arr[0]);
+    int *pfx_arr = new int(size);
+    pfx_arr[0] = arr[0];
     // Build prefix sum array
     for (int i = 1; i < size; i++) {
         pfx_arr.push_back(arr[i] + pfx_arr[i - 1]);
