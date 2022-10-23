@@ -25,4 +25,15 @@ void bubble_sort(vector<int> &arr) {
     }
 }
 
+void bubble_sort_opt(vector<int> &arr) {
+    for (int times = 1; times <= arr.size() - 1; times++) {
+        for (int i = 0; i <= arr.size() - times - 1; i++) {
+            if (arr[i] > arr[i+1]) {
+                swap(arr[i], arr[i+1]);
+            }
+        }
+    }
+}
+
+
 #endif //DSA_ESSENTIALS_SORTING_H
