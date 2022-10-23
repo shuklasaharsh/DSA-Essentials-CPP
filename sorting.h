@@ -25,6 +25,12 @@ void bubble_sort(vector<int> &arr) {
     }
 }
 
+/*
+ * bubble_sort_opt sorts the array in O(n^2) time
+ *
+ * 1 -> n times
+ * We compare i = 0 to n
+ */
 void bubble_sort_opt(vector<int> &arr) {
     for (int times = 1; times <= arr.size() - 1; times++) {
         for (int i = 0; i <= arr.size() - times - 1; i++) {
