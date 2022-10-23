@@ -6,6 +6,7 @@
 #define DSA_ESSENTIALS_SORTING_H
 
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,6 +33,24 @@ void bubble_sort(vector<int> &arr) {
  * We compare i = 0 to n
  */
 void bubble_sort_opt(vector<int> &arr) {
+    // We take the second element and if it less than the first element we shift all the elements by 1
+    // we add the card to position 0 (1)
+
+    // [0, 22, -1, 3, 5]
+    // [i   j          ] = is larger than 0 (no action)
+    // [        j      ] = is less than 0
+    // [-1, 0, 22, 3, 5]
+    // [    i  j       ] = is larger than 0
+    // [    i      j   ] = is larger than 0
+    // [    i         j] = is larger than 0
+    // [-1, 0, 22, 3, 5]
+    // [       i   j   ] = is less than 22
+    // [-1, 0, 3, 22, 5]
+    // [           i  j] = is less than 22
+    // [-1, 0, 3, 5, 22]
+    // Sorted
+
+    // By the above algorithm explanation we see that we have 2 vars i and j
     for (int times = 1; times <= arr.size() - 1; times++) {
         for (int i = 0; i <= arr.size() - times - 1; i++) {
             if (arr[i] > arr[i+1]) {
@@ -39,6 +58,12 @@ void bubble_sort_opt(vector<int> &arr) {
             }
         }
     }
+}
+
+void insertion_sort(vector<int> &arr) {
+
+
+
 }
 
 
