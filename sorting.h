@@ -69,7 +69,7 @@ void insertion_sort(vector<int> &arr) {
     // We select an element on the right side
     // Select 22 in case 1 and check with
     auto n = arr.size();
-    for (int current_card = 0; current_card <= n; current_card++) {
+    for (int current_card = 0; current_card < n; current_card++) {
         // We have array after the first element
         // [22, -1, 3, 5]
         // We select the first element
