@@ -63,11 +63,13 @@ void bubble_sort_opt(vector<int> &arr) {
 /*
  * insertion_sort sorts an algorithm
  */
-void insertion_sort(vector<int> &arr) {
+template <typename t>
+void insertion_sort(vector<t> &arr, bool comp(t num1, t num2, bool dec)) {
     // For insertion sort we have the left side of the array always sorted
     // [0, 22, -1, 3, 5]
     // We select an element on the right side
     // Select 22 in case 1 and check with
+
     auto n = arr.size();
     for (int current_card = 0; current_card < n; current_card++) {
         // We have array after the first element
@@ -77,8 +79,10 @@ void insertion_sort(vector<int> &arr) {
         // [0, 22, -1, 3, 5]
         // -1 should come before 0
         // [-1 0 22 3 5]
-        auto key = arr[current_card], hand = current_card - 1;
-        while (hand >= 0 && arr[hand] > key) {
+
+        t key = arr[current_card];
+        auto hand = current_card - 1;
+        while (hand >= 0 && comp(arr[hand], key, false)) {
             arr[hand + 1] = arr[hand];
             hand--;
         }
