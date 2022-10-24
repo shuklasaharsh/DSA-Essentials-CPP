@@ -284,4 +284,24 @@ int largest_sum_sub_array_running_sum(const t *arr, int size) {
     return current_sum;
 }
 
+pair<int, int> closest_sum(vector<int> arr, int x) {
+    // Closest Sum
+    int minimum = INT_MAX;
+    int start = 0, end = arr.size() - 1;
+    int res_start, res_end;
+    while (start > end) {
+        if (abs(arr[start] + arr[end] - x) < minimum) {
+            res_start = start;
+            res_end = end;
+            minimum = abs(arr[start] + arr[end] - x);
+        }
+        if (arr[start] + arr[end] > x) {
+            start--;
+        } else {
+            end++;
+        }
+    }
+    return {arr[res_start], arr[res_end]};
+}
+
 #endif //DSA_ESSENTIALS_ARRAYS_H
