@@ -87,18 +87,26 @@ namespace adt {
             }
             // If not we carry on
             // To do this operation we shift the array by 1 pos
-            for (auto i = position; i < this-> length; i++) {
+            for (auto i = this->length - 1; i >= position; i--) {
                 arr[i + 1] = arr[i];
             }
             arr[position] = element;
             this->length++;
         }
 
-        void print() {
-            for (auto i = 0; i < this->length; i++) {
-                std::cout << this->arr[i] << " ";
+        void print(bool pos = false) {
+            if (pos) {
+                for (auto i = 0; i < this->length; i++) {
+                    std::cout << i <<"|"<< this->arr[i] << endl;
+                }
+                cout << endl;
+            } else {
+                for (auto i = 0; i < this->length; i++) {
+                    std::cout << this->arr[i] << " ";
+                }
+                std::cout << std::endl;
             }
-            std::cout << std::endl;
+
         }
 
         void resize(int new_size) {
