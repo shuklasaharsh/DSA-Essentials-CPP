@@ -119,7 +119,7 @@ namespace adt {
         }
 
         void sort() {
-            std::sort(&arr, &arr + size);
+            std::sort(arr, arr + length);
         }
     };
 
