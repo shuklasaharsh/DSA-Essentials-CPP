@@ -25,13 +25,23 @@ namespace adt {
         int &operator[](int);
 
         /*
+         * Copy constructor
+         */
+        List(adt::List const &list1) {
+            int *dynamic_array = list1.arr;
+            this->arr = dynamic_array;
+            this->length = list1.length;
+            this->size = list1.size;
+        }
+
+        /*
          * Creates a list of default size
          */
         List() {
             int *dynamic_array = new int(DEFAULT_LIST_SIZE);
             this->arr = dynamic_array;
-            this->size = 10;
-            this->length = 5;
+            this->size = DEFAULT_LIST_SIZE;
+            this->length = 0;
         }
 
         /*
@@ -178,6 +188,15 @@ namespace adt {
 
     int &List::operator[](int a) {
         return this->arr[a];
+    }
+
+    List operator+(List a, List b) {
+        List c;
+        auto n = (a.length > b.length) ? a.length:b.length;
+        for (auto i = 0; i < n; i++) {
+            c.insert(a[i] + b[i]);
+        }
+        return c;
     }
 
     ostream &operator<<(ostream &o, List l) {
