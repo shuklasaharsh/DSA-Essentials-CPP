@@ -11,8 +11,11 @@
 const int DEFAULT_LIST_SIZE = 100;
 
 namespace adt {
+    // List implements the Abstract Data Type via dynamic arrays while keeping track of size and length properties.
     class List {
     private:
+        bool sorted = false;
+        int *sorted_arr;
         bool debug = false;
         int *arr;
         int size;
@@ -32,6 +35,9 @@ namespace adt {
             this->arr = dynamic_array;
             this->length = list1.length;
             this->size = list1.size;
+            this->sorted_arr = dynamic_array;
+            this->sorted = true;
+            std::sort(sorted_arr, sorted_arr + this->length);
         }
 
         /*
@@ -52,6 +58,9 @@ namespace adt {
             this->arr = dynamic_array;
             this->size = 2 * size;
             this->length = size;
+            this->sorted_arr = dynamic_array;
+            std::sort(sorted_arr, sorted_arr + this->length);
+            this->sorted = true;
         }
 
         /*
@@ -65,16 +74,22 @@ namespace adt {
             this->arr = dynamic_array;
             this->size = 2 * size;
             this->length = size;
+            this->sorted_arr = dynamic_array;
+            std::sort(sorted_arr, sorted_arr + this->length);
+            this->sorted = true;
         }
 
+        // set_debug value as true
         void set_debug() {
             this->debug = true;
         }
 
+        // set_debug_off sets the value as false
         void set_debug_off() {
             this->debug = false;
         }
 
+        // get_debug returns if debug mode is on
         [[nodiscard("get debug prop")]]bool get_debug() const {
             return this->debug;
         }
@@ -154,7 +169,10 @@ namespace adt {
                 }
                 std::cout << std::endl;
             }
+        }
 
+        [[nodiscard]] int get_size() const {
+            return this->size;
         }
 
         /*
@@ -174,11 +192,31 @@ namespace adt {
         // sort the array by using std::sort
         // time complexity: O(nlog(n))
         void sort(bool reverse = false) {
+            if (this->sorted) {
+                arr = sorted_arr;
+                return;
+            }
             if (reverse) {
                 std::sort(arr, arr + length, std::greater<int>());
             } else {
                 std::sort(arr, arr + length, std::less<int>());
             }
+        }
+
+        void remove(int position) {
+            if (this->length < position) {
+                return;
+            }
+            // We need to move the array to the position
+            // Starting from length till position
+            // int arr2[] = {99, 2, 9, 4, -6, 6, 7, 11, 8, -10};
+            //               0   1  2  3   4  5  6  7   8   9
+            //               Remove element on position 1
+            // replace 1 with 2, 2 with 3, 3 with 4...
+            for (auto i = position + 1; i <= this->length; i++) {
+                this->arr[i - 1] = this->arr[i];
+            }
+            this->length--;
         }
     };
 
@@ -191,10 +229,20 @@ namespace adt {
     }
 
     List operator+(List a, List b) {
-        List c;
-        auto n = (a.length > b.length) ? a.length:b.length;
-        for (auto i = 0; i < n; i++) {
-            c.insert(a[i] + b[i]);
+        auto check_a_b = (a.length > b.length);
+        auto c = (a.length > b.length) ? List(a) : List(b);
+        for (auto i = 0; i < c.length; i++) {
+            if (!check_a_b) {
+                if (a.get_debug() || b.get_debug()) {
+                    cout << c[i] << "+" << a[i] << endl;
+                }
+                c[i] += a[i];
+            } else {
+                if (a.get_debug() || b.get_debug()) {
+                    cout << c[i] << "+" << b[i] << endl;
+                }
+                c[i] += b[i];
+            }
         }
         return c;
     }
