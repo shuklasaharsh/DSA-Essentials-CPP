@@ -94,8 +94,8 @@ namespace adt {
             this->length++;
         }
 
-        void print(bool pos = false) {
-            if (pos) {
+        void print(bool debug = false) {
+            if (debug) {
                 for (auto i = 0; i < this->length; i++) {
                     std::cout << i <<"|"<< this->arr[i] << endl;
                 }
