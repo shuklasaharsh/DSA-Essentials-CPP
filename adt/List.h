@@ -158,7 +158,10 @@ namespace adt {
                 }
                 std::cout << std::endl;
             }
+        }
 
+        [[nodiscard]] int get_size() const {
+            return this->size;
         }
 
         /*
@@ -184,6 +187,23 @@ namespace adt {
                 std::sort(arr, arr + length, std::less<int>());
             }
         }
+
+        void remove(int position) {
+            if (this->length < position) {
+                return;
+            }
+            // We need to move the array to the position
+            // Starting from length till position
+            // int arr2[] = {99, 2, 9, 4, -6, 6, 7, 11, 8, -10};
+            //               0   1  2  3   4  5  6  7   8   9
+            //               Remove element on position 1
+            // replace 1 with 2, 2 with 3, 3 with 4...
+            for (auto i = position + 1; i <= this->length; i++) {
+                this->arr[i - 1] = this->arr[i];
+            }
+            this->length--;
+        }
+
     };
 
     bool reverse_cmp(int num1, int num2) {
