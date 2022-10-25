@@ -19,6 +19,7 @@ namespace adt {
         friend bool reverse_cmp(int num1, int num2);
         // describes the number of elements in the list
         int length;
+        int &operator[] (int);
 
         /*
          * Creates a list of default size
@@ -130,6 +131,10 @@ namespace adt {
 
     bool reverse_cmp(int num1, int num2) {
         return num1 < num2;
+    }
+
+    int &List::operator[](int a) {
+        return this->arr[a];
     }
 
 }
