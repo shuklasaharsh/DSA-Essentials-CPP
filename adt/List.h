@@ -16,6 +16,7 @@ namespace adt {
         int *arr;
         int size;
     public:
+        friend bool reverse_cmp(int num1, int num2);
         // describes the number of elements in the list
         int length;
 
@@ -118,10 +119,18 @@ namespace adt {
             this->size = new_size;
         }
 
-        void sort() {
-            std::sort(arr, arr + length);
+        void sort(bool reverse = false) {
+            if (reverse) {
+                std::sort(arr, arr + length, std::greater<int>());
+            } else {
+                std::sort(arr, arr+length, std::less<int>());
+            }
         }
     };
+
+    bool reverse_cmp(int num1, int num2) {
+        return num1 < num2;
+    }
 
 }
 
