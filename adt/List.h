@@ -137,6 +137,13 @@ namespace adt {
         return this->arr[a];
     }
 
+    ostream &operator<<(ostream &o, adt::List l) {
+        for (int i = 0; i < l.length; i++) {
+            o << l[i] << " ";
+        }
+        return o;
+    }
+
 }
 
 #endif //DSA_ESSENTIALS_LIST_H
