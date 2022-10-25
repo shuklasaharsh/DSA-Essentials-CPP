@@ -198,9 +198,15 @@ namespace adt {
         auto check_a_b = (a.length > b.length);
         auto c = (a.length > b.length) ? List(a) : List(b);
         for (auto i = 0; i < c.length; i++) {
-            if (check_a_b) {
+            if (!check_a_b) {
+                if (a.get_debug() || b.get_debug()) {
+                    cout << c[i] << "+" << a[i] << endl;
+                }
                 c[i] += a[i];
             } else {
+                if (a.get_debug() || b.get_debug()) {
+                    cout << c[i] << "+" << b[i] << endl;
+                }
                 c[i] += b[i];
             }
         }
