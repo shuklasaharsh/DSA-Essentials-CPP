@@ -14,6 +14,8 @@ namespace adt {
     // List implements the Abstract Data Type via dynamic arrays while keeping track of size and length properties.
     class List {
     private:
+        bool sorted = false;
+        int *sorted_arr;
         bool debug = false;
         int *arr;
         int size;
@@ -33,6 +35,9 @@ namespace adt {
             this->arr = dynamic_array;
             this->length = list1.length;
             this->size = list1.size;
+            this->sorted_arr = dynamic_array;
+            this->sorted = true;
+            std::sort(sorted_arr, sorted_arr + this->length);
         }
 
         /*
@@ -53,6 +58,9 @@ namespace adt {
             this->arr = dynamic_array;
             this->size = 2 * size;
             this->length = size;
+            this->sorted_arr = dynamic_array;
+            std::sort(sorted_arr, sorted_arr + this->length);
+            this->sorted = true;
         }
 
         /*
@@ -66,6 +74,9 @@ namespace adt {
             this->arr = dynamic_array;
             this->size = 2 * size;
             this->length = size;
+            this->sorted_arr = dynamic_array;
+            std::sort(sorted_arr, sorted_arr + this->length);
+            this->sorted = true;
         }
 
         // set_debug value as true
@@ -181,6 +192,10 @@ namespace adt {
         // sort the array by using std::sort
         // time complexity: O(nlog(n))
         void sort(bool reverse = false) {
+            if (this->sorted) {
+                arr = sorted_arr;
+                return;
+            }
             if (reverse) {
                 std::sort(arr, arr + length, std::greater<int>());
             } else {
@@ -203,7 +218,6 @@ namespace adt {
             }
             this->length--;
         }
-
     };
 
     bool reverse_cmp(int num1, int num2) {
