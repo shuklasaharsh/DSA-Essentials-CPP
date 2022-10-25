@@ -11,6 +11,7 @@
 const int DEFAULT_LIST_SIZE = 100;
 
 namespace adt {
+    // List implements the Abstract Data Type via dynamic arrays while keeping track of size and length properties.
     class List {
     private:
         bool debug = false;
@@ -67,14 +68,17 @@ namespace adt {
             this->length = size;
         }
 
+        // set_debug value as true
         void set_debug() {
             this->debug = true;
         }
 
+        // set_debug_off sets the value as false
         void set_debug_off() {
             this->debug = false;
         }
 
+        // get_debug returns if debug mode is on
         [[nodiscard("get debug prop")]]bool get_debug() const {
             return this->debug;
         }
@@ -191,10 +195,14 @@ namespace adt {
     }
 
     List operator+(List a, List b) {
-        List c;
-        auto n = (a.length > b.length) ? a.length:b.length;
-        for (auto i = 0; i < n; i++) {
-            c.insert(a[i] + b[i]);
+        auto check_a_b = (a.length > b.length);
+        auto c = (a.length > b.length) ? List(a) : List(b);
+        for (auto i = 0; i < c.length; i++) {
+            if (check_a_b) {
+                c[i] += a[i];
+            } else {
+                c[i] += b[i];
+            }
         }
         return c;
     }
