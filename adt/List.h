@@ -69,6 +69,12 @@ namespace adt {
             return this->debug;
         }
 
+        /*
+         * insert works via push_back()
+         * it takes an element and pushes it to the back of the array
+         * This either creates a new array in O(n)
+         * Or adds the element directly O(1)
+         */
         void insert(int element) {
             if (this->length + 1 >= this->size) {
                 // If length after adding an element is greater than size, we need to create a new array
@@ -88,6 +94,18 @@ namespace adt {
             }
         }
 
+        /*
+         * insert pushes an element into a specific position in the array
+         * [1, 2, 3, 6, 7]
+         *  0  1  2  3  4
+         *  For insertion into position 3
+         *  [1, 2, 3, 6, 7]
+         *  We move elements in position 3 and 4
+         *  we loop to move the elements.
+         *  Then we add the element to that position
+         *
+         *  Time Space: O(n)
+         */
         void insert(int element, int position) {
             // first we check if length + 1 will be == size
             if (this->length + 1 >= this->size) {
@@ -111,6 +129,9 @@ namespace adt {
             this->length++;
         }
 
+        /*
+         * print the array
+         */
         void print(bool debug_print = false) {
             if (debug_print) {
                 for (auto i = 0; i < this->length; i++) {
@@ -126,6 +147,11 @@ namespace adt {
 
         }
 
+        /*
+         * resize the array to add extra space to it
+         *
+         * time complexity: O(n)
+         */
         void resize(int new_size) {
             int *dynamic_array = new int(new_size);
             for (auto i = 0; i < this->length; i++) {
@@ -135,6 +161,8 @@ namespace adt {
             this->size = new_size;
         }
 
+        // sort the array by using std::sort
+        // time complexity: O(nlog(n))
         void sort(bool reverse = false) {
             if (reverse) {
                 std::sort(arr, arr + length, std::greater<int>());
