@@ -25,7 +25,7 @@ namespace adt {
             head = d;
         }
 
-        auto get_head() const {return head;}
+        [[nodiscard]] auto get_head() const {return head;}
 
         void insert(int data) {
             auto d = new Node();
