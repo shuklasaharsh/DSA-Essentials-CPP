@@ -13,8 +13,10 @@ namespace adt {
             int data;
             Node* next;
         };
-        Node* head;
+        Node* head{};
     public:
+        Linked_List() = default;
+
         void insert(int data) {
 
         }
