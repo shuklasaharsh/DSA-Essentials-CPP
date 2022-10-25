@@ -61,6 +61,10 @@ namespace adt {
             this->debug = true;
         }
 
+        void set_debug_off() {
+            this->debug = false;
+        }
+
         [[nodiscard("get debug prop")]]bool get_debug() const {
             return this->debug;
         }
