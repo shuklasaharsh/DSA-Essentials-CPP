@@ -7,6 +7,17 @@
 
 namespace adt {
     class Linked_List {
+    private:
+        int length = 0;
+        struct Node {
+            int data;
+            Node* next;
+        };
+        Node* head;
+    public:
+        void insert(int data) {
+
+        }
 
     };
 }
