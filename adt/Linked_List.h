@@ -25,9 +25,21 @@ namespace adt {
     };
 
     class LinkedList {
-        Node *head;
+        Node *head{};
     public:
         LinkedList() { head = nullptr; }
+
+
+        LinkedList(const int *arr, int size) {
+            for (int i = 0; i < size; i++) {
+                Node n = Node(arr[i]);
+                if (i == 0) {
+                    *this->head = n;
+                } else {
+                    insert_node(arr[i]);
+                }
+            }
+        }
 
         void insert_node(int);
 
