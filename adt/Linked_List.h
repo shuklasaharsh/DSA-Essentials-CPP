@@ -125,8 +125,6 @@ namespace adt {
             temp = temp->next;
         }
     }
-
-
 }
 
 
